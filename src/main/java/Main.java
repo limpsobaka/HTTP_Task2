@@ -39,8 +39,8 @@ public class Main {
     try (FileOutputStream out = new FileOutputStream(filename);
          BufferedOutputStream bos = new BufferedOutputStream(out)) {
       bos.write(data, 0, data.length);
-    } catch (IOException ex) {
-      System.out.println(ex.getMessage());
+    } catch (IOException e) {
+      System.out.println("Произошла ошибка: " + e.getMessage());
     }
   }
 }
