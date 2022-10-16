@@ -28,17 +28,17 @@ public class Main {
       }
     };
 
-    byte[] response = getDataByUrl
+    byte[] data = getDataByUrl
             .apply("https://api.nasa.gov/planetary/apod?api_key=UR9fSe8mGSf9exriuBK9v2rXXidb6IJltD8WC2Fr");
-    Entity entity = mapper.readValue(response, new TypeReference<>() {
+    Entity entity = mapper.readValue(data, new TypeReference<>() {
     });
 
     String url = entity.getUrl();
     String filename = url.split("/")[url.split("/").length - 1];
-    response = getDataByUrl.apply(url);
+    data = getDataByUrl.apply(url);
     try (FileOutputStream out = new FileOutputStream(filename);
          BufferedOutputStream bos = new BufferedOutputStream(out)) {
-      bos.write(response, 0, response.length);
+      bos.write(data, 0, data.length);
     } catch (IOException ex) {
       System.out.println(ex.getMessage());
     }
