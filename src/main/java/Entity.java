@@ -31,4 +31,7 @@ public class Entity {
     return url;
   }
 
+  public String getMediaType() {
+    return mediaType;
+  }
 }

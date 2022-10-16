@@ -33,14 +33,16 @@ public class Main {
     Entity entity = mapper.readValue(data, new TypeReference<>() {
     });
 
-    url = entity.getUrl();
-    String filename = url.split("/")[url.split("/").length - 1];
-    data = getDataByUrl.apply(url);
-    try (FileOutputStream out = new FileOutputStream(filename);
-         BufferedOutputStream bos = new BufferedOutputStream(out)) {
-      bos.write(data, 0, data.length);
-    } catch (IOException e) {
-      System.out.println("Произошла ошибка: " + e.getMessage());
+    if (entity.getMediaType().equals("image")) {
+      url = entity.getUrl();
+      String filename = url.split("/")[url.split("/").length - 1];
+      data = getDataByUrl.apply(url);
+      try (FileOutputStream out = new FileOutputStream(filename);
+           BufferedOutputStream bos = new BufferedOutputStream(out)) {
+        bos.write(data, 0, data.length);
+      } catch (IOException e) {
+        System.out.println("Произошла ошибка: " + e.getMessage());
+      }
     }
   }
 }
